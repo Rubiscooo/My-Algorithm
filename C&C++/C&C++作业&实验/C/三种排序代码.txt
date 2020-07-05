@@ -1,0 +1,64 @@
+∆’Õ®≈≈–Ú
+#include <stdio.h>
+#include <string.h>
+int swap(int *p,int *q)
+{
+    int t;
+    t=*p;
+    *p=*q;
+    *q=t;
+}
+int main()
+{
+   int a[1000];
+   int i=0;
+   while( scanf("%d",&a[i]) != EOF)
+   {
+       i++;
+   }
+   int j;
+   int t;
+for(t=0;t<=i-2;t++)
+ {
+   for(j=t+1;j<=i-1;j++)
+   {
+       if(a[t]>a[j])
+        swap(&a[t],&a[j]);
+   }
+ }
+ for(t=0;t<=i-1;t++)
+    printf("%d ",a[t]);
+}
+√∞≈›≈≈–Ú
+#include <stdio.h>
+#include <string.h>
+int aswap(int *p,int *q)
+{
+    int t;
+    t=*p;
+    *p=*q;
+    *q=t;
+}
+int main()
+{
+   int a[1000];
+   int i=0;
+   while( scanf("%d",&a[i]) != EOF)
+   {
+       i++;
+   }
+   int j;
+   int t;
+for(t=0;t<=i-1;t++)
+ {
+   for(j=0;j<=i-2;j++)
+   {
+       if(a[j]>a[j+1])
+        {
+            aswap(&a[j],&a[j+1]);
+        }
+   }
+ }
+ for(t=0;t<=i-1;t++)
+    printf("%d ",a[t]);
+}

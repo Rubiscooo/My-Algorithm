@@ -1,0 +1,150 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <math.h>
+int f1()
+{
+    int a=123456;
+    double b = 123.4567;
+    char d = 'a';
+    char c = 'A';  //给单个字符赋值用单引号
+    char sstr[5] = "ABCD";
+    char str[50] = "ABCD"; //给字符串数组赋值用双引号且要规定大小
+    printf("%d %o %x %X %lf %e %g \n",a,a,a,a,b,b,b);
+    // %d十进制 %o八进制 %x或%X十六进制  大小写对应
+    //%lf输出double %e或%E 科学计数法 %g 按e,f较短的输出
+    printf("%c %s %s\n",c,str,sstr);
+    printf("%d %d\n",c,d);
+    printf("%10d\n",a);  //默认右对齐
+    printf("%-10d\n",a);   // -让输出结果左对齐
+    printf("%15.8lf\n",b);  // m.n 同时控制宽度和精度
+    printf("%-15.8lf\n",b);
+    //字符是用ASCLL码存的用%d就能输出其对应的码 a = 65 A = 97
+    putchar(c);
+    puts(str);  //这两个输出函数不会自动换行
+}
+int f2()
+{
+    int a1,a2;
+    double a = 123.4567;
+    double b = -987.654321;
+    int c = 1;
+    int d=8,e=2;
+    printf("%lf\n",fabs(b)); //浮点数绝对值头文件是在<stdlib.h> fabs！
+    printf("%lf %lf %lf\n",log(c),log10(c),log2(c));  //底数写在log后面就可
+    a1 = pow(a,c);  //使用数学函数要加头文件 <math.h>
+    a2 = d%e; //取余数运算要求运算的量都是整数
+
+}
+int  f3()
+{
+    int a=5,b=5;
+    printf("++a = %d b++ = %d ",++a,b++); // ++位置不同效果不同
+    printf("b = %d\n",b);
+}
+int   f4()
+{
+    unsigned long long int a=12345678998777; //某些提可能数据很大需要这样定义数据类型
+    printf("a = %llu\n",a);   // WA可能还是有边界数据处理不好 注意边界
+    // 数据类型定义太小可能导致理论AC
+}
+int f5()
+{
+    //判断闰年的代码
+    int n;
+    scanf("%d",&n);
+    if(n%400==0)
+        printf("Yes");
+    else if(n%4==0&&n%100!=0)
+        printf("Yes");
+    else
+        printf("No");
+
+}
+int f6()
+{
+    //输出  "" % 这样的字符要在前面加 \ 反斜杠
+    printf(" %%   \\   \" \n");
+}
+int f7() //强制数据类型转换
+{
+    double a=112233.45678;
+    printf("%d",(int)(a));
+}
+int f8(int a[]) //如果传一个数组要加 中括号 可以不写数组大小
+{
+    ;
+}
+int f9()
+{
+    char str[100],s[100];
+    scanf("%s\n",str);//scanf以空格 回车 TAB为结束标志 所以输入 abc efg
+    //是让 str = abc , s =efg
+    gets(s);  //gets自动在字符串结尾+ \0
+    printf("%s\n",str);
+    puts(s);  // puts自动加换行  读到 \0才停止输出
+}
+int f10()
+{
+    int N;
+
+
+    scanf("%d",&N);
+    getchar();  //有时需要一个getchar把回车读进去 防止引起不必要的麻烦
+
+
+    scanf("%d\n",&N);//这样也可以
+}
+int f11()  //对结构体使用typedef的操作方式
+{
+    typedef struct
+    {
+        int year,month,date;
+        char name[100];
+    } DATE;
+    int getDate(DATE *d)
+    {
+        scanf("%d %d %d %s",&d->year,&d->month,&d->date,d->name);
+        puts(d->name); //输出name
+    } //输入字符串不用+&
+    int putDate(DATE d)
+    {
+        printf("%04d-%02d-%02d\n",d.year,d.month,d.date);
+        puts(d.name);
+    }
+    int main()
+    {
+        DATE date;
+        getDate(&date);
+        putDate(date);
+        return 0;
+    }
+}
+int f11()
+{
+    struct point
+    {
+        double x;
+        double y;
+    };
+
+    int get_point(struct point *t)  //注意一下结构体形参传递的格式
+    {
+        scanf("(%lf, %lf)",&t->x,&t->y);
+    }
+    judge_point(struct point p)
+}
+int main()
+{
+    //f1();
+    //f2();
+    //f3();
+    //f4();
+    //f5();
+    //f6();
+    //f7();
+    //f8();
+    //f9();
+    //f10();
+}

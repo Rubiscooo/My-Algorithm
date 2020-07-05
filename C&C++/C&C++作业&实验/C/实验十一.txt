@@ -1,0 +1,319 @@
+第一题
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int main()
+{
+  int x,y;
+  scanf("%d %d",&x,&y);
+  printf("Octal Decimal Hexadecimal\n");
+  printf("%-6o",x);
+  printf("%-8d",x);
+  printf("%x\n",x);
+  printf("%-6o",y);
+  printf("%-8d",y);
+  printf("%x\n",y);
+}
+第二题
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int main()
+{
+  int nianji,banhao,renshu;
+  char xueyuan,zhuanye;
+  scanf("%d %c %c %d %d",&nianji,&xueyuan,&zhuanye,&banhao,&renshu);
+  int a1,a2,a3,a4,a5;
+  a2 = xueyuan - 'A' + 1;
+  a3 = zhuanye - 'A' + 1;
+  int i;
+  for(i=1;i<=renshu;i++)
+    printf("%d%.2d%.2d%.2d%.2d\n",nianji,a2,a3,banhao,i);
+}
+第三题
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX_STR_LEN 111
+char * str_cat(char * str, char * s)
+{
+    int l1,l2,i,j,u,r;
+    char *t;
+    for(i=0;str[i] != '\0';i++)  // str
+        ;
+    for(j=0;s[j] != '\0';j++)   // s
+        ;
+    t = (char *)malloc(sizeof(char) * (i+j+1));
+    for(u=0;u<=i;u++)
+        *(t + u) = *(str + u);
+    for(u=i,r=0;r<=j;u++,r++)
+        *(t + u) = *(s + r);
+    return t;
+}
+第四题
+#include <stdio.h>
+//#include <stdlib.h>
+//#define MAX_STR_LEN 111
+int ackermann(int m,int n)
+{
+    if( m == 0)
+        return n+1;
+    if( m > 0 && n == 0)
+        ackermann(m-1,1);
+    if(m > 0 && n > 0)
+        ackermann(m-1,ackermann(m,n-1));
+}
+int main()
+{
+  int m,n;
+  int result;
+  scanf("%d %d",&m,&n);
+  result = ackermann(m,n);
+  printf("A(%d, %d) = %d\n",m,n,result);
+}
+第五题
+#include <stdio.h>
+#define MAX_SIZE 200
+ 
+int get_matrix(int a[][MAX_SIZE], int m, int n)
+{
+    int i, j;
+    for (i = 1; i <= m; i++)
+        for (j = 1; j <= n; j++)
+            scanf("%d", &a[i][j]);
+}
+int count_sum(int arr[], int a[][MAX_SIZE], int m, int n)
+{
+    int i, j;
+    for (i = 1; i <= m; i++)
+    {
+        int sum = 0;
+        for (j = 1; j <= n; j++) sum += a[i][j];
+        arr[i] = sum;
+    }
+}
+ 
+int put_array(int arr[], int n)
+{
+    int i;
+    for (i = 1; i < n; i++) printf("%d ", arr[i]);
+    printf("%d\n", arr[n]);
+}
+ 
+ 
+ 
+int main()
+{
+    int i, cases, sum[MAX_SIZE];
+    int m, n, matrix[MAX_SIZE][MAX_SIZE];
+    scanf("%d", &cases);
+    for(i = 1; i <= cases; i++)
+    {
+        scanf("%d%d", &m, &n);
+        get_matrix(matrix, m, n);
+        count_sum(sum, matrix, m, n);
+        printf("case %d:", i);
+        put_array(sum, m);
+    }
+    return 0;
+}
+第六题
+#include<stdio.h>
+#include<string.h>
+
+typedef struct
+{
+    int ty;
+    int point; // 点数
+} Poker;
+
+int get_card(Poker *pk)
+{
+    char s;
+    s = getchar();
+    if( s == 'A' )  pk->ty = 1;
+    if( s == 'B' )  pk->ty = 2;
+    if( s == 'C' )  pk->ty = 3;
+    if( s == 'D' )  pk->ty = 4;
+    getchar();
+    scanf("%d",&pk->point);
+    getchar();
+}
+
+int card_cmp(Poker p1, Poker p2)
+{
+    printf("%d %d\n",p1.ty,p1.point);
+    printf("%d %d\n",p2.ty,p2.point);
+
+    if(p1.point > p2.point)
+        return 1;
+    else if(p1.point < p2.point)
+        return -1;
+    else if(p1.point == p2.point)
+    {
+        if(p1.ty == p2.ty)
+            return 0;
+        if(p1.ty > p2.ty)
+            return 1;
+        if(p1.ty < p2.ty)
+            return -1;
+    }
+}
+
+int main()
+{
+    Poker tom, jack;
+    get_card(&tom);
+    get_card(&jack);
+
+    int result = card_cmp(tom, jack);
+    if(result > 0)
+        puts("Tom wins.");
+    if(result < 0)
+        puts("Jack wins.");
+    if(result == 0)
+        puts("Tie.");
+}
+第七题
+#include<stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int main()
+{
+    int x,y,i=0,k=0,flag =0;
+    int n;
+    scanf("%d",&n);
+    for( y = -n/2; y <= n/2; y++)
+    {
+        for(x = -n/2 ; x <= n / 2; x++)
+        {
+
+            if( abs(x) + abs(y) <= n/2 )
+            {
+                printf("%c",('A' + k + i ));
+                i++;
+                flag = 1;
+            }
+            if( flag == 0 && abs(x) + abs(y) > n/2)
+                printf(" ");
+        }
+        i=0;
+        flag = 0;
+        if( y < 0)
+        {
+            k++;
+        }
+        if( y >= 0 )
+        {
+            k--;
+        }
+        if( y != n/2)
+          {printf("\n");}
+    }
+}
+第八题
+#include<stdio.h>
+#include <stdlib.h>
+#include <string.h>
+int main()
+{
+   int s[10001]={0};
+   int N;
+   scanf("%d",&N);
+   int i;
+   for(i=1;i<=N;i++)
+    scanf("%d",&s[i]);
+   int a,b;
+   int start,end;
+   while(scanf("%d %d",&a,&b) != EOF)
+   {
+        if( a > b)
+        {
+            int swap;
+            swap = a;
+            a = b;
+            b = swap;
+        }
+        if( a > N || b <= 0)
+        {
+            printf("OUT OF RANGE\n");
+            continue;
+        }
+        else if( a >=1  && b <= N)
+        {
+            start = a;
+            end = b;
+        }
+        else if( a <= 0 && b <=N)
+        {
+            start = 1;
+            end = b;
+        }
+        else if( a<=N && b > N && a >= 1)
+        {
+            start = a;
+            end = N;
+            //printf("yes!!!\n");
+        }
+        else if( a <= 0 && b > N)
+        {
+            start = 1;
+            end = N;
+            //printf("yes\n");
+        }
+       for(i=start;i<=end;i++)
+       {
+
+           if(i == start )
+            printf("%d",s[i]);
+           else
+            printf(" %d",s[i]);
+       }
+       printf("\n");
+   }
+}
+第九题
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+   int m,i,u=1,num,sum=0,result,sumzuo=0,sumyou=0,clas=0;
+   int peo[27]={0};
+   scanf("%d",&m);
+    for(i=1; i<=m; i++)
+    {
+        scanf("%d",&peo[i]);
+        sum += peo[i];
+    }
+   sumyou = peo[1];
+   while(scanf("%d",&num) != EOF)
+   {
+      if( num == sum)
+      {
+            printf("Class %c : %d\n",'A' + m - 1 ,peo[m]);
+            continue;
+      }
+       num = num % sum;
+      if( num == 1)
+        {
+            printf("Class A : 1\n");
+            continue;
+        }
+
+      while( num >= sumyou )
+      {
+
+          sumzuo += peo[u];
+          sumyou += peo[u+1];
+          u++;
+          clas++;
+      }
+      result = num % sumzuo;
+      if(result == 0)
+        result = peo[u-1];
+      printf("Class %c : %d\n",'A' + clas,result);
+      u = 1;
+      clas = 0;
+      sumzuo = 0;
+      sumyou = peo[1];
+   }
+}
